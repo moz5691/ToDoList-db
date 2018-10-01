@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-/* map global promise */
 mongoose.Promise = global.Promise;
 
 const options = {

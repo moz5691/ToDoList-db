@@ -10,13 +10,12 @@ router.use((req, res, next) => {
 router.get('/', (req, res) => {
   Todo.find({})
     .then(toDos => {
-      //res.send({ todos });
       res.render('home', { toDos: toDos });
     })
     .catch(err => res.status(400).send(err));
 });
 
-// Add process, tes purpose
+// Add process, test purpose
 router.post('/api', (req, res) => {
   const todo = new Todo({
     text: req.body.text,
