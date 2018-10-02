@@ -45,13 +45,19 @@ router.put('/api/:id', (req, res) => {
 
 // Delete process, Use for DELETE Button
 router.delete('/api/delete/:id', (req, res) => {
-  Todo.deleteOne({ _id: req.params.id })
-    .then(() => {
-      res.json({ success: true });
-    })
-    .catch(err => {
-      res.status.json({ err: err });
-    });
+  Todo.findOne({
+    _id: req.params.id
+  }).then(found => {
+    if (found.completed) {
+      Todo.deleteOne({ _id: req.params.id })
+        .then(() => {
+          res.json({ success: true });
+        })
+        .catch(err => {
+          res.status.json({ err: err });
+        });
+    }
+  });
 });
 
 // Make sure no "UPDATE" method with app.xxxx, use "PUT" instead.
